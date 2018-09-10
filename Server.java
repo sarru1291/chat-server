@@ -8,20 +8,20 @@ public class Server {
 
         ServerSocket serverSocket = new ServerSocket(5000);
         Socket socket = serverSocket.accept();
-        PrintStream ps = new PrintStream(System.out);
-        ps.println("\n Connection established!!\n");
-        Scanner sc = new Scanner(soc.getInputStream());
-        Scanner sc1 = new Scanner(System.in);
-        PrintStream ps1 = new PrintStream(soc.getOutputStream());
-        String str = "";
+        PrintStream sendToConsole = new PrintStream(System.out);
+        sendToConsole.println("\n Connection established!!\n");
+        Scanner readFromKeyboard = new Scanner(System.in);
+        PrintStream sendToSocket = new PrintStream(socket.getOutputStream());
+        Scanner readFromSocket = new Scanner(socket.getInputStream());
+        String sendingMessage = "";
+        String receivingMessage = "";
+        sendToConsole.print("          Press CTRL+C to exit !!!\n\n");
         while (true) {
-            str = sc.nextLine();
-            ps.println("client>> " + str);
-
-            ps.print("server>> ");
-            String str1 = sc1.nextLine();
-            ps1.println(str1);
-
+            receivingMessage = readFromSocket.nextLine();
+            sendToConsole.println("Client>> " + receivingMessage);
+            sendToConsole.print("Server>> ");
+            sendingMessage = readFromKeyboard.nextLine();
+            sendToSocket.println(sendingMessage);
         }
     }
 }

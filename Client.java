@@ -10,7 +10,7 @@ public class Client {
         Scanner readFromKeyboard = new Scanner(System.in);
         PrintStream sendToConsole = new PrintStream(System.out);
         PrintStream sendToSocket = new PrintStream(socket.getOutputStream());
-        Scanner readFromSocket = new Scanner(soc.getInputStream());
+        Scanner readFromSocket = new Scanner(socket.getInputStream());
         String sendingMessage = "";
         String receivingMessage = "";
         sendToConsole.print("          Press CTRL+C to exit !!!\n\n");
