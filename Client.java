@@ -1,26 +1,25 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
+import java.util.Scanner;
 
-public class client {
+public class Client {
 
     public static void main(String... s) throws IOException {
 
-        Socket soc = new Socket("192.168.43.82", 5000);
-        String str = "";
-        PrintStream ps = new PrintStream(soc.getOutputStream());
-        PrintStream ps1 = new PrintStream(System.out);
-        Scanner sc = new Scanner(soc.getInputStream());
-        Scanner sc1 = new Scanner(System.in);
-        ps1.print("Press CTRL+C to exit !!!\n");
+        Socket socket = new Socket("127.0.0.1", 5000);
+        Scanner readFromKeyboard = new Scanner(System.in);
+        PrintStream sendToConsole = new PrintStream(System.out);
+        PrintStream sendToSocket = new PrintStream(socket.getOutputStream());
+        Scanner readFromSocket = new Scanner(soc.getInputStream());
+        String sendingMessage = "";
+        String receivingMessage = "";
+        sendToConsole.print("          Press CTRL+C to exit !!!\n\n");
         while (true) {
-            ps1.print("client>> ");
-            str = sc1.nextLine();
-            ps.println(str);
-            String str1 = sc.nextLine();
-
-            ps1.println("server>> " + str1);
-
+            sendToConsole.print("Client>> ");
+            sendingMessage = readFromKeyboard.nextLine();
+            sendToSocket.println(sendingMessage);
+            receivingMessage = readFromSocket.nextLine();
+            sendToConsole.println("Server>> " + receivingMessage);
         }
     }
 }
