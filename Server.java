@@ -9,19 +9,23 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(5000);
         Socket socket = serverSocket.accept();
         PrintStream sendToConsole = new PrintStream(System.out);
-        sendToConsole.println("\n Connection established!!\n");
+        sendToConsole.println("Connection established!!\n");
         Scanner readFromKeyboard = new Scanner(System.in);
         PrintStream sendToSocket = new PrintStream(socket.getOutputStream());
         Scanner readFromSocket = new Scanner(socket.getInputStream());
         String sendingMessage = "";
         String receivingMessage = "";
         sendToConsole.print("          Press CTRL+C to exit !!!\n\n");
-        while (true) {
-            receivingMessage = readFromSocket.nextLine();
-            sendToConsole.println("Client>> " + receivingMessage);
-            sendToConsole.print("Server>> ");
-            sendingMessage = readFromKeyboard.nextLine();
-            sendToSocket.println(sendingMessage);
+        try {
+            while (true) {
+                receivingMessage = readFromSocket.nextLine();
+                sendToConsole.println("Client>> " + receivingMessage);
+                sendToConsole.print("Server>> ");
+                sendingMessage = readFromKeyboard.nextLine();
+                sendToSocket.println(sendingMessage);
+            }
+        } catch (Exception NoSuchElementException) {
+            sendToConsole.println("\n         Connection Disconnected!!!");
         }
     }
 }
